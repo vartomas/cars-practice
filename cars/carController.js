@@ -48,15 +48,13 @@ updateCar = async (req, res) => {
 
 filterCars = async (req, res) => {
     const filter = {}
-    if (req.body.filterByRun) {
-        if (req.body.runGreaterThan) filter.run = {$gte: req.body.runG}
-        if (req.body.runLowerThan) filter.run = {...filter.run, $lte: req.body.runL}
-    }
-    if (req.body.filterByYear) {
-        if (req.body.yearGreaterThan) filter.year = {$gte: new Date(req.body.yearG)}
-        if (req.body.yearLowerThan) filter.year = {...filter.year, $lte: new Date(req.body.yearL)}
-    }
-    if (req.body.filterByGearbox) filter.gearbox = req.body.gearbox
+    if (req.body.runGreaterThan) filter.run = {$gte: req.body.runGreaterThan}
+    if (req.body.runLowerThan) filter.run = {...filter.run, $lte: req.body.runLowerThan}
+    if (req.body.yearGreaterThan) filter.year = {$gte: new Date(req.body.yearGreaterThan)}
+    if (req.body.yearLowerThan) filter.year = {...filter.year, $lte: new Date(req.body.yearLowerThan)}
+    if (req.body.filterByGearbox) filter.gearbox = req.body.filterByGearbox
+
+    console.log(filter)
 
     sort = arr => {
         switch(req.body.sortBy) {
@@ -84,18 +82,11 @@ filterCars = async (req, res) => {
 /*
 filtro pvz su visais property
 {
-    "filterByRun": true,
-    "runGreaterThan": true,
-    "runLowerThan": true,
-    "runG": 20000,
-    "runL": 100000,
-    "filterByYear": true,
-    "yearGreaterThan": true,
-    "yearLowerThan": true,
-    "yearG": "2010",
-    "yearL": "2015",
-    "filterByGearbox": true,
-    "gearbox": "auto",
+    "runGreaterThan": 20000,
+    "runLowerThan": 100000,
+    "yearGreaterThan": "2010",
+    "yearLowerThan": "2015",
+    "filterByGearbox": "auto",
     "sortBy": "year"
 }
 */
