@@ -54,18 +54,16 @@ filterCars = async (req, res) => {
     if (req.body.yearLowerThan) filter.year = {...filter.year, $lte: new Date(req.body.yearLowerThan)}
     if (req.body.filterByGearbox) filter.gearbox = req.body.filterByGearbox
 
-    console.log(filter)
-
     sort = arr => {
         switch(req.body.sortBy) {
             case 'year':
-                arr = arr.sort((a, b) => a.year - b.year).reverse()
+                arr.sort((a, b) => a.year - b.year).reverse()
                 break
             case 'model':
-                arr = arr.sort((a, b) => (a.model > b.model) ? 1 : -1)
+                arr.sort((a, b) => (a.model > b.model) ? 1 : -1)
                 break
             case 'run':
-                arr = arr.sort((a, b) => a.run - b.run)
+                arr.sort((a, b) => a.run - b.run)
                 break
         }
         return arr
